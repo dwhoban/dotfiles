@@ -3,6 +3,9 @@
   "instructions": ["AGENTS.md"],
   "permission": {
     "edit": "allow",
+    "external_directory": {
+      "~/.config/**": "allow"
+    },
     "bash": {
       "chezmoi diff*": "allow",
       "chezmoi managed*": "allow",

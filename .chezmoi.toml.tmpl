@@ -1,0 +1,11 @@
+# Data from 1Password, fetched via the op CLI.
+# Available to all templates as .email, .username, etc.
+# Re-run `chezmoi init` after signing in to 1Password (with CLI
+# integration enabled) for these values to resolve.
+#
+# Example entry (a template action inside a comment still executes,
+# so only uncomment with a real secret reference):
+#   email = onepasswordRead "op://Private/Example/username" | quote
+{{ if lookPath "op" -}}
+[data]
+{{ end -}}

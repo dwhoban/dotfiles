@@ -1,0 +1,19 @@
+# Ghostty theme
+theme = Kanagawa Wave
+
+# Updates
+# auto-update-channel = tip
+
+# Shell integrations
+shell-integration = zsh
+
+# Clipboard settings
+clipboard-read = allow
+clipboard-write = allow
+
+# macos options
+macos-option-as-alt = true
+# macos-titlebar-proxy-icon = hidden
+
+# Decrease scroll sensitivity
+# mouse-scroll-multiplier = 0.4

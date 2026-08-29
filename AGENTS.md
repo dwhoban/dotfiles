@@ -12,10 +12,25 @@ Toolchain: Homebrew 6.x at `/opt/homebrew` (Apple Silicon macOS), chezmoi 2.72+ 
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply dwhoban/dotfiles
 ```
 
-First-apply order: `run_once_before_darwin-install-homebrew.sh.tmpl` installs
-Homebrew if missing → managed targets written (incl. `~/.zprofile` with brew
-shellenv) → `run_onchange_darwin-install-packages.sh.tmpl` runs `brew bundle`
-over `.chezmoidata/packages.yaml`.
+Install scripts live in `.chezmoiscripts/` (executed as normal scripts, never
+deployed as files; the `run_` attribute is still required). First-apply order:
+`.chezmoiscripts/run_once_before_darwin-install-homebrew.sh.tmpl` installs
+Homebrew if missing →
+`.chezmoiscripts/run_once_before_darwin-install-1password.sh.tmpl`
+installs the 1Password app + CLI if missing and, if `op` has no signed-in
+account, opens 1Password and blocks at an Enter prompt until sign-in (reads
+from `/dev/tty`; Ctrl-C leaves `run_once_` state unsaved so it re-prompts
+next apply) → managed targets written (incl. `~/.zprofile` with brew
+shellenv) →
+`.chezmoiscripts/run_onchange_darwin-install-packages.sh.tmpl` runs `brew
+bundle` over `.chezmoidata/packages.yaml`.
+
+Secrets: 1Password casks are NOT in `packages.yaml` — the dedicated script
+owns them. `.chezmoi.toml.tmpl` guards `onepasswordRead` calls with
+`lookPath "op"`; because templates render before scripts run, secret values
+resolve only on the NEXT `chezmoi init` (config template) / `chezmoi apply`
+(file templates) after 1Password is signed in with "Integrate with 1Password
+CLI" enabled.
 
 ## Commands
 

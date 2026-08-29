@@ -1,0 +1,13 @@
+{{ if lookPath "op" -}}
+# This is the 1Password SSH agent config file, which allows you to customize the
+# behavior of the SSH agent running on this machine.
+#
+# Managed by chezmoi — generated from `op vault list --format json`. Do not edit.
+# More examples can be found here:
+#  https://www.1password.dev/ssh/agent/config
+{{ range (output "op" "vault" "list" "--format" "json" | fromJson) -}}
+[[ssh-keys]]
+vault = {{ .name | quote }}
+
+{{ end -}}
+{{ end -}}

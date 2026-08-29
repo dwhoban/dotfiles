@@ -32,8 +32,6 @@ packages:
       - ddev/ddev/ddev
       - oven-sh/bun/bun
     casks:
-      - 1password
-      - 1password-cli
       - daptify14/tap/chezit
       - discord
       - docker-desktop

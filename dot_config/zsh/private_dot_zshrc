@@ -1,0 +1,84 @@
+if command -v brew &>/dev/null; then
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi
+
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# Zinit installation
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Load OMZ libs we need (not the whole thing)
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::directories.zsh
+zinit snippet OMZL::theme-and-appearance.zsh
+zinit snippet OMZL::async_prompt.zsh
+
+# eza config - must be set BEFORE loading the plugin
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'header' yes
+zstyle ':omz:plugins:eza' 'icons' yes
+
+# Load OMZ plugins
+zinit snippet OMZP::git
+zinit snippet OMZP::brew
+zinit snippet OMZP::direnv
+zinit snippet OMZP::eza
+
+# Zsh plugins
+zinit light fdellwing/zsh-bat
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Load completions efficiently (after prompt is ready)
+autoload -Uz compinit
+compinit
+
+
+. "$HOME/.vite-plus/env"
+
+if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
+if command -v starship &>/dev/null; then
+    # Starship prompt
+    eval "$(starship init zsh)"
+
+    export STARSHIP_LOG=error
+
+    function set_win_title() {
+        echo -ne "\033]0; $(basename "$PWD") \007"
+    }
+    starship_precmd_user_func="set_win_title"
+fi
+
+if command -v atuin &>/dev/null; then
+    eval "$(atuin init zsh)"
+fi
+
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
