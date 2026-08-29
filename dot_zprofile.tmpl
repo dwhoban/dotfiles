@@ -1,0 +1,16 @@
+# Set XDG Folders
+export XDG_CACHE_HOME=${HOME}/.cache
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_DATA_HOME=${HOME}/.local/share
+export XDG_STATE_HOME=${HOME}/.local/state
+
+# Set ZSH Config Path
+export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
+
+{{ if eq .chezmoi.os "darwin" -}}
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+{{- end }}
+
+# Local bin
+# export PATH="$HOME/.local/bin:PATH"

@@ -1,0 +1,47 @@
+packages:
+  darwin:
+    taps:
+      - anomalyco/tap
+      - daptify14/tap
+      - ddev/ddev
+      - oven-sh/bun
+    brews:
+      - atuin
+      - bat
+      - chezmoi
+      - direnv
+      - eza
+      - fzf
+      - git
+      - git-delta
+      - go
+      - herdr
+      - lazydocker
+      - lazygit
+      - lazyssh
+      - nano
+      - neovim
+      - rustup
+      - starship
+      - tenv
+      - tree-sitter-cli
+      - uv
+      - zoxide
+      - zsh
+      - anomalyco/tap/opencode
+      - ddev/ddev/ddev
+      - oven-sh/bun/bun
+    casks:
+      - 1password
+      - 1password-cli
+      - daptify14/tap/chezit
+      - discord
+      - docker-desktop
+      - font-victor-mono-nerd-font
+      - ghostty
+      - obsidian
+      - utm
+      - whatsapp
+      - zcode
+      - zed
+      - zen

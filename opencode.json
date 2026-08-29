@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "permission": {
+    "edit": "allow",
+    "bash": {
+      "chezmoi diff*": "allow",
+      "chezmoi managed*": "allow",
+      "chezmoi cat*": "allow",
+      "chezmoi source-path*": "allow",
+      "chezmoi apply*": "ask"
+    }
+  }
+}
