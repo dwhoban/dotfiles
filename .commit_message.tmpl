@@ -1,26 +1,28 @@
-{{- with .chezmoi.status }}
-
+{{- with .chezmoi.status -}}
+{{- $adds := 0 -}}
+{{- $updates := 0 -}}
+{{- $removes := 0 -}}
+{{- $lines := list -}}
 {{- range .Ordinary -}}
-{{ if and (eq .X 'A') (eq .Y '.') -}}Add {{ .Path | targetRelPath }}
-{{ else if and (eq .X 'D') (eq .Y '.') -}}Remove {{ .Path | targetRelPath }}
-{{ else if and (eq .X 'M') (eq .Y '.') -}}Update {{ .Path | targetRelPath }}
-{{ else }}{{ warnf "unsupported XY: %c%c" .X .Y }}
-{{ end }}
+{{- if and (eq .X 'A') (eq .Y '.') -}}{{- $adds = add1 $adds -}}{{- $lines = append $lines (print "add: " (.Path | targetRelPath)) -}}
+{{- else if and (eq .X 'D') (eq .Y '.') -}}{{- $removes = add1 $removes -}}{{- $lines = append $lines (print "remove: " (.Path | targetRelPath)) -}}
+{{- else if and (eq .X 'M') (eq .Y '.') -}}{{- $updates = add1 $updates -}}{{- $lines = append $lines (print "update: " (.Path | targetRelPath)) -}}
+{{- else -}}{{- warnf "unsupported XY: %c%c" .X .Y -}}
 {{- end -}}
-
+{{- end -}}
 {{- range .RenamedOrCopied -}}
-{{ if and (eq .X 'R') (eq .Y '.') }}Change attributes of {{ .Path | targetRelPath }}
-{{ else if and (eq .X 'C') (eq .Y '.') -}}Copy {{ .OrigPath | targetRelPath }} to {{ .Path | targetRelPath }}
-{{ else }}{{ warnf "unsupported XY: %c%c" .X .Y }}
-{{ end }}
+{{- if and (eq .X 'R') (eq .Y '.') -}}{{- $updates = add1 $updates -}}{{- $lines = append $lines (print "update: " (.Path | targetRelPath)) -}}
+{{- else if and (eq .X 'C') (eq .Y '.') -}}{{- $adds = add1 $adds -}}{{- $lines = append $lines (print "add: " (.Path | targetRelPath)) -}}
+{{- else -}}{{- warnf "unsupported XY: %c%c" .X .Y -}}
 {{- end -}}
-
-{{- range .Unmerged -}}
-{{ warnf "unmerged files" }}
 {{- end -}}
-
-{{- range .Untracked -}}
-{{ warnf "untracked files" }}
+{{- range .Unmerged -}}{{- warnf "unmerged files" -}}{{- end -}}
+{{- range .Untracked -}}{{- warnf "untracked files" -}}{{- end -}}
+{{- $summary := list -}}
+{{- if gt $adds 0 -}}{{- $summary = append $summary (printf "add %d" $adds) -}}{{- end -}}
+{{- if gt $updates 0 -}}{{- $summary = append $summary (printf "update %d" $updates) -}}{{- end -}}
+{{- if gt $removes 0 -}}{{- $summary = append $summary (printf "remove %d" $removes) -}}{{- end -}}
+{{- if $lines -}}{{- printf "dotfiles change: %s\n\n%s" (join ", " $summary) (join "\n" $lines) -}}
+{{- else -}}dotfiles change
 {{- end -}}
-
 {{- end -}}

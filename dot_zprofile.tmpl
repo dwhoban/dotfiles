@@ -1,0 +1,15 @@
+# Set XDG Folders
+export XDG_CACHE_HOME=${HOME}/.cache
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_DATA_HOME=${HOME}/.local/share
+export XDG_STATE_HOME=${HOME}/.local/state
+
+# Set ZSH Config Path
+export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
+
+# Shared shell config: PATH, env, aliases, secrets
+# (N) = nullglob: skip the loop entirely if the dir is empty
+for _script in ${XDG_CONFIG_HOME}/scripts/*.sh(N); do
+    . "$_script"
+done
+unset _script
