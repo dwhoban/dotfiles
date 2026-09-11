@@ -1,1 +1,21 @@
+# Base configuration — chezmoi regenerates ~/.config/chezmoi/chezmoi.toml
+# from this file on `chezmoi init`.
 
+progress = true
+pager = "bat"
+
+[diff]
+pager = "delta"
+
+[edit]
+command = "zed"
+args = ["--wait"]
+
+[git]
+autoAdd = true
+autoCommit = true
+autoPush = false
+commitMessageTemplateFile = ".commit_message.tmpl"
+
+[onepassword]
+cache = true
