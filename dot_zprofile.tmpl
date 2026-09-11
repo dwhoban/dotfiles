@@ -1,2 +1,11 @@
-# Set ZSH Config Path
-export ZDOTDIR="$HOME/.config/zsh
+# Login shell setup for zsh.
+# Shared environment, PATH, and aliases live in ~/.config/shell.
+
+# (N) = nullglob: skip the loop entirely if the dir is empty
+for _script in "$HOME"/.config/shell/*.sh(N); do
+    . "$_script"
+done
+unset _script
+
+# Keep zsh config in ~/.config/zsh
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"

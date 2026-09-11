@@ -1,5 +1,13 @@
+# Login shell setup for sh/bash.
+# Shared environment, PATH, and aliases live in ~/.config/shell.
 
+for _script in "$HOME"/.config/shell/*.sh; do
+    [ -f "$_script" ] || continue
+    . "$_script"
+done
+unset _script
 
+# Bash-specific interactive config
 if [ -f "$HOME/.config/bash/bashrc" ]; then
-    source "$HOME/.config/bash/bashrc"
+    . "$HOME/.config/bash/bashrc"
 fi
