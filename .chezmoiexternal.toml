@@ -1,0 +1,4 @@
+[".config/opencode/vendor/i-have-adhd"]
+    type = "git-repo"
+    url = "https://github.com/ayghri/i-have-adhd.git"
+    refreshPeriod = "168h"
