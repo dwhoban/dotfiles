@@ -1,0 +1,12 @@
+[user]
+	email = 5687870+dwhoban@users.noreply.github.com
+	name = Dan Hoban
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKY/bdzhIh6p1ET5tEahUAF10HajmrZlmORIPLl5ednj
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
