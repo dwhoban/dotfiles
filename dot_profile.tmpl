@@ -1,15 +1,5 @@
-# POSIX login shell config for sh and bash (zsh uses ~/.zprofile).
-# Read by bash login shells only when ~/.bash_profile does not exist.
 
-# Set XDG Folders
-export XDG_CACHE_HOME=${HOME}/.cache
-export XDG_CONFIG_HOME=${HOME}/.config
-export XDG_DATA_HOME=${HOME}/.local/share
-export XDG_STATE_HOME=${HOME}/.local/state
 
-# Shared shell config: PATH, env, aliases, secrets
-for _script in "${XDG_CONFIG_HOME}/scripts"/*.sh; do
-    [ -f "$_script" ] || continue
-    . "$_script"
-done
-unset _script
+if [ -f "$HOME/.config/bash/bashrc" ]; then
+    source "$HOME/.config/bash/bashrc"
+fi
