@@ -74,3 +74,10 @@ if command -v atuin &>/dev/null; then
     eval "$(atuin init zsh)"
 fi
 
+# Work config (cloned by chezmoi on work machines); loaded last so work can override.
+# If work defines ZLE widgets, prefer sourcing them before zsh-syntax-highlighting.
+for _script in "$HOME"/.config/work/zsh/*.zsh(N); do
+    . "$_script"
+done
+unset _script
+

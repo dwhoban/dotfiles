@@ -4,3 +4,4 @@ install-init-shell.sh
 .commit_message.tmpl
 .DS_Store
 homebrew
+WORK-REPO.md

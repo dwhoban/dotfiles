@@ -25,7 +25,9 @@ Toolchain: Homebrew 7.x at `/opt/homebrew` (Apple Silicon macOS), chezmoi 2.72+ 
   work machine — it would wipe work-tap trust entries.
 - Work machines layer a second Brewfile from the work repo clone at
   `~/.config/work/homebrew/Brewfile`, applied by
-  `run_after_install-work-packages.sh` (runtime content-hash gated).
+  `run_after_install-work-packages.sh` (runtime content-hash gated). The
+  full work-repo contract (layout, Brewfile trust rules, shell layering)
+  is `WORK-REPO.md`.
 - Fresh-machine bootstrap: `install-init-shell.sh` installs Homebrew
   (official installer, guarded) before `chezmoi init --apply`; a
   `read-source-state.pre` hook (`.install-password-manager.sh`) installs the

@@ -37,3 +37,10 @@ fi
 if command -v atuin &>/dev/null; then
     eval "$(atuin init bash)"
 fi
+
+# Work config (cloned by chezmoi on work machines); loaded last so work can override
+for _script in "$HOME"/.config/work/bash/*.sh; do
+    [ -f "$_script" ] || continue
+    . "$_script"
+done
+unset _script
