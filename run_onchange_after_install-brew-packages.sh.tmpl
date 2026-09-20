@@ -1,0 +1,17 @@
+#!/bin/sh
+# Brewfile hash: {{ include "homebrew/Brewfile" | sha256sum }}
+# Install everything declared in the personal Brewfile. The target
+# (~/.config/homebrew/Brewfile) is a symlink into this repo, so
+# `brew bundle add` records straight into the source; this script
+# re-runs whenever that file's content changes.
+
+set -e
+
+HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE
+
+BREW=/opt/homebrew/bin/brew
+[ -x "$BREW" ] || BREW=$(command -v brew 2>/dev/null || true)
+[ -n "$BREW" ] || exit 0
+
+exec "$BREW" bundle install --no-upgrade --file "${HOME}/.config/homebrew/Brewfile"

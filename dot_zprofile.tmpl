@@ -5,6 +5,11 @@
 for _script in "$HOME"/.config/shell/*.sh(N); do
     . "$_script"
 done
+
+# Work configuration (cloned by chezmoi on work machines)
+for _script in "$HOME"/.config/work/shell/*.sh(N); do
+    . "$_script"
+done
 unset _script
 
 # Keep zsh config in ~/.config/zsh

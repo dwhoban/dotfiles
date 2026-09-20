@@ -11,6 +11,16 @@ is_command() {
 	type "${1}" >/dev/null 2>&1
 }
 
+# Install Homebrew first so package setup (brew bundle) can rely on it.
+# Apple Silicon installs to /opt/homebrew; brew is then put on PATH for
+# the rest of this script and for `chezmoi init --apply`.
+if ! is_command brew && [ ! -x /opt/homebrew/bin/brew ]; then
+	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+if [ -x /opt/homebrew/bin/brew ]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 if [ -n "${LOGNAME}" ]; then
 	username="${LOGNAME}"
 elif [ -n "${USER}" ]; then

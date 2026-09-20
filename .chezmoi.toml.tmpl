@@ -1,6 +1,12 @@
 # Base configuration — chezmoi regenerates ~/.config/chezmoi/chezmoi.toml
 # from this file on `chezmoi init`.
 
+{{- $work := promptBoolOnce . "work" "Is this a work device? (y/N)" -}}
+{{- $workRepoURL := "" -}}
+{{- if $work -}}
+{{- $workRepoURL = promptStringOnce . "workRepoURL" "Work dotfiles repo URL (SSH)" "git@github.com:dwhoban/work-dotfiles.git" -}}
+{{- end -}}
+
 progress = true
 pager = "bat"
 
@@ -19,3 +25,10 @@ commitMessageTemplateFile = ".commit_message.tmpl"
 
 [onepassword]
 cache = true
+
+[hooks.read-source-state.pre]
+    command = "{{ .chezmoi.sourceDir }}/.install-password-manager.sh"
+
+[data]
+    work = {{ $work }}
+    workRepoURL = {{ $workRepoURL | quote }}

@@ -17,8 +17,6 @@ fi
 # Prefer git's own subcommand completion over fzf's path completion for git
 _completion_loader git 2>/dev/null && complete -o bashdefault -o default -o nospace -F __git_main git 2>/dev/null
 
-. "$HOME/.vite-plus/env"
-
 if command -v zoxide &>/dev/null; then
     eval "$(zoxide init bash)"
 fi

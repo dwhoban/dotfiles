@@ -1,0 +1,116 @@
+tap "anomalyco/tap"
+tap "can1357/tap"
+tap "daptify14/tap"
+tap "ddev/ddev"
+tap "hashicorp/tap"
+tap "oven-sh/bun"
+# Browser automation CLI for AI agents
+brew "agent-browser"
+# Automate deployment, configuration, and upgrading
+brew "ansible"
+# Checks ansible playbooks for practices and behaviour
+brew "ansible-lint"
+# Universal Tool for DevOps and Cloud Automation
+brew "atmos"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Programmable completion for Bash 4.2+
+brew "bash-completion@2"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# Tool for managing dock items
+brew "dockutil"
+# Modern, maintained replacement for ls
+brew "eza"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Open-source GitLab command-line tool
+brew "glab"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Fast linters runner for Go
+brew "golangci-lint"
+# Language server for `golangci-lint`
+brew "golangci-lint-langserver"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
+# Lazier way to manage everything docker
+brew "lazydocker"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Terminal-based SSH manager
+brew "lazyssh"
+# Free (GNU) replacement for the Pico text editor
+brew "nano"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Drop-in replacement for Terraform. Infrastructure as Code Tool
+brew "opentofu"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Rust toolchain installer
+brew "rustup"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# UNIX shell (command interpreter)
+brew "zsh"
+# The AI coding agent built for the terminal.
+brew "anomalyco/tap/opencode", trusted: true
+# Coding agent with the IDE wired in
+brew "can1357/tap/omp", trusted: true
+# DDEV
+brew "ddev/ddev/ddev", trusted: true
+# Terraform
+brew "hashicorp/tap/terraform", trusted: true
+# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
+brew "oven-sh/bun/bun", trusted: true
+# Command-line helper for the 1Password password manager
+cask "1password-cli@beta"
+# Password manager
+cask "1password@beta"
+# Terminal UI for chezmoi dotfile management
+cask "daptify14/tap/chezit", trusted: true
+# Voice and text chat software
+cask "discord"
+# App to build and share containerised applications and microservices
+cask "docker-desktop"
+cask "font-victor-mono-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Virtual machines UI using QEMU
+cask "utm"
+# Native desktop client for WhatsApp
+cask "whatsapp"
+# AI-assisted development environment
+cask "zcode"
+# Multiplayer code editor
+cask "zed"
+# Gecko based web browser
+cask "zen"
+go "github.com/JacobJNilsson/anti-slop-go/cmd/antislop"
+go "github.com/golangci/golangci-lint/v2/cmd/golangci-lint"
+go "github.com/dwhoban/terraform-provider-pve"

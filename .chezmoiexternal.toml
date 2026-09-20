@@ -1,4 +1,11 @@
-[".config/opencode/vendor/i-have-adhd"]
+# External work configuration.
+# Cloned to ~/.config/work on work machines only; pulled manually with `chezmoi -R apply`.
+{{ if and .work .workRepoURL }}
+[".config/work"]
     type = "git-repo"
-    url = "https://github.com/ayghri/i-have-adhd.git"
-    refreshPeriod = "168h"
+    url = {{ .workRepoURL | quote }}
+    refreshPeriod = "0"
+
+    [".config/work".pull]
+        args = ["--ff-only"]
+{{ end }}

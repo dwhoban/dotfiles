@@ -5,6 +5,12 @@ for _script in "$HOME"/.config/shell/*.sh; do
     [ -f "$_script" ] || continue
     . "$_script"
 done
+
+# Work configuration (cloned by chezmoi on work machines)
+for _script in "$HOME"/.config/work/shell/*.sh; do
+    [ -f "$_script" ] || continue
+    . "$_script"
+done
 unset _script
 
 # Bash-specific interactive config
