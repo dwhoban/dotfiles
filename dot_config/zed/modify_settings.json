@@ -1,0 +1,9 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- $s := fromJsonc .chezmoi.stdin -}}
+{{- $s = setValueAtPath "icon_theme" "File Icons" $s -}}
+{{- $s = setValueAtPath "autosave" "on_focus_change" $s -}}
+{{- $s = setValueAtPath "cli_default_open_behavior" "new_window" $s -}}
+{{- $s = setValueAtPath "ui_font_size" 16 $s -}}
+{{- $s = setValueAtPath "buffer_font_size" 15 $s -}}
+{{- $s = setValueAtPath "theme" "Kanagawa Wave" $s -}}
+{{- $s | toPrettyJson -}}
