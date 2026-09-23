@@ -1,0 +1,16 @@
+# Source a .env that's a 1Password Environments FIFO mount (or a regular file).
+# 1Password serves mounted .env files through a UNIX named pipe on demand;
+# direnv's `dotenv` stdlib cannot read FIFOs, so source it directly.
+# Usage in a project .envrc: op_dotenv [file]   (default: ./.env)
+# NOTE: never `watch_file` a FIFO-mounted .env — open/close events loop direnv.
+# Run `direnv reload` after rotating secrets in 1Password.
+op_dotenv() {
+  local env_file="${1:-.env}"
+  if [ -p "$env_file" ]; then
+    set -a
+    . "$env_file"
+    set +a
+  elif [ -f "$env_file" ]; then
+    dotenv "$env_file"
+  fi
+}
